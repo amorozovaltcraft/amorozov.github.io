@@ -1,0 +1,5 @@
+{
+  "permissions": [ "activeTab" ],
+  "name": "http://altcraft.andrey.morozov.lan",
+  "display": "standalone"
+}
