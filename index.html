@@ -54,6 +54,8 @@
         counter++;
     }, 1000)
 
+    alert(firebase.messaging.isSupported());
+
     document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
         try {
             var akPush = new AKPush();
