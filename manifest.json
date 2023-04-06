@@ -1,5 +1,6 @@
 {
   "permissions": [ "activeTab" ],
   "name": "http://altcraft.andrey.morozov.lan",
+  "shortname": "WPA",
   "display": "standalone"
 }
