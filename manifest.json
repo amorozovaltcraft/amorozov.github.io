@@ -1,5 +1,8 @@
 {
-  "permissions": [ "activeTab" ],
+  "permissions": [
+    "activeTab"
+  ],
+  "short_name": "VSEM-SPASATb",
   "name": "http://altcraft.andrey.morozov.lan",
   "shortname": "WPA",
   "display": "standalone"
