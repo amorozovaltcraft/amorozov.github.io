@@ -18,6 +18,7 @@
 </head>
 <body>
 <button type="button" id="init_sub" style="height: 100px; padding: 25px">TEST PIXEL на уведомления</button>
+<button type="button" id="run_push" style="height: 100px; padding: 25px">Получить уведомление</button>
 <h1>Something for scroll</h1>
 <h1>Something for scroll</h1>
 <h1>Something for scroll</h1>
@@ -65,8 +66,10 @@
         counter++;
     }, 1000)
 
-    document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
-        !function(){var e={url:"https://pxl.andrey-morozov.dev.altkraft.com/pixel?k=34FyFph%2BVuzFYrhPh7C10IJo%2Br4EkbuWm%2Fqui6fGQJa6XD9SM9jghQ%3D%3D&s=OVA7pk7G%2FmI%3D",goals:"",value:parseFloat("0"),timeout:parseInt("0"),after_scroll:JSON.parse("false"),auto_load:JSON.parse("true")},o=function(o,t,n,a){var d=[].concat(o).map(function(e){return encodeURIComponent(e)}).join(","),c=encodeURIComponent(String(t||0)),i=encodeURIComponent(n.matching_mode||""),r=encodeURIComponent(n.db_id||0),u=encodeURIComponent(JSON.stringify(n.match||{})),l=encodeURIComponent(JSON.stringify(n.update||{}));setTimeout(function(){(new Image).src=[e.url,"goals="+d,"value="+c,"db_id="+r,"mmode="+i,"match="+u,"update="+l].join("&")},a)},t=!1,n=function(){t||(t=!0,e.after_scroll?document.addEventListener("scroll",function(){(window.pageYOffset||document.documentElement.scrollTop>0)&&o(e.goals,e.value,{},e.timeout)},{once:true}):e.auto_load&&o(e.goals,e.value,{},e.timeout))};"complete"===document.readyState||"interactive"===document.readyState?n():window.addEventListener("load",n);window.ak_pixel_push=function(e,t,n,a,d,c){var i=[];Array.isArray(e)?i=e:i[0]=e,o(i,t,{match:n,update:a,matching_mode:d,db_id:c},0)}}();
+    document.getElementById('init_sub').addEventListener('click', function() {
+        fetch('http://click.andrey-morozov.dev.altkraft.com/trg/65512f8ec196edd65c541df5a9a08449ec91dbf287bb334c2f3de6b87e2969e3/<email|md5|xxh>');
+    });
+    document.getElementById('run_push').addEventListener('click', function() { // По клику на кнопку..
         try {
             var akPush = new AKPush();
 
