@@ -14,51 +14,11 @@
     <link rel="manifest" href="/manifest.json">
 
     <title>Title</title>
-    <script src="https://pxl.andrey-morozov.dev.altkraft.com/ak_container.js?id=MXwz" ></script>
+    <script src="ak-push.js" ></script>
 </head>
 <body>
 <button type="button" id="init_sub" style="height: 100px; padding: 25px">TEST PIXEL на уведомления</button>
 <button type="button" id="run_push" style="height: 100px; padding: 25px">Получить уведомление</button>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
-<h1>Something for scroll</h1>
 <script>
     let counter = 0;
     setInterval(() => {
@@ -66,12 +26,21 @@
         counter++;
     }, 1000)
 
-    document.getElementById('init_sub').addEventListener('click', function() {
-        //fetch('http://click.andrey-morozov.dev.altkraft.com/trg/65512f8ec196edd65c541df5a9a08449ec91dbf287bb334c2f3de6b87e2969e3/<email|md5|xxh>');
+    document.getElementById('run_push').addEventListener('click', function() {
+        fetch(
+            'https://click.andrey-morozov.dev.altkraft.com/trg/65512f8ec196edd65c541df5a9a08449ec91dbf287bb334c2f3de6b87e2969e3/43f669d7ef683766',
+            {
+                method: 'GET',
+                mode: 'no-cors',
+            },
+        ).then(console.log);
     });
-    document.getElementById('run_push').addEventListener('click', function() { // По клику на кнопку..
+    document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
         try {
-            var akPush = new AKPush();
+            const akPush = new AKPush({
+                debug: 'true',
+                swPath: '/service-worker.js',
+            });
 
             akPush.initSubscription({ email: 'bulba@azcabaeba.su' }) // ..показать форму подписки
         }
