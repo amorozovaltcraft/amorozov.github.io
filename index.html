@@ -20,11 +20,21 @@
 <button type="button" id="init_sub" style="height: 100px; padding: 25px">TEST PIXEL на уведомления</button>
 <button type="button" id="run_push" style="height: 100px; padding: 25px">Получить уведомление</button>
 <script>
-    let counter = 0;
     setInterval(() => {
-        console.log(counter);
-        counter++;
-    }, 1000)
+        console.log('counter');
+    }, 5000);
+
+    window.onload = () => navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        window.WebWorkers = registrations;
+
+        const registration = navigator.serviceWorker.register(
+            "cache-service-worker.js",
+            { scope: "/" },
+        );
+
+        console.log(registration);
+
+    });
 
     document.getElementById('run_push').addEventListener('click', function() {
         fetch(
@@ -33,7 +43,7 @@
                 method: 'GET',
                 mode: 'no-cors',
             },
-        ).then(console.log);
+        ).then(console.log, console.log);
     });
     document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
         try {
