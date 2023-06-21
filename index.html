@@ -27,17 +27,14 @@
     window.onload = () => navigator.serviceWorker.getRegistrations().then(function(registrations) {
         window.WebWorkers = registrations;
 
-        const registration = navigator.serviceWorker.register(
-            "cache-service-worker.js",
-            { scope: "/" },
-        );
+        // const registration = navigator.serviceWorker.register(
+        //     "cache-service-worker.js",
+        //     { scope: "/" },
+        // );
 
-        console.log(registration);
+        // console.log(registration);
 
-        window.akPush = new AKPush({
-            debug: 'true',
-            swPath: '/assets/service-worker.js',
-        });
+        window.akPush = new AKPush();
 
     });
 
