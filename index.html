@@ -17,7 +17,7 @@
     <script src="ak-push.js" ></script>
 </head>
 <body>
-<button type="button" id="init_sub" style="height: 100px; padding: 25px">TEST PIXEL на уведомления</button>
+<button type="button" id="init_sub" style="height: 100px; padding: 25px">initSubscription</button>
 <button type="button" id="run_push" style="height: 100px; padding: 25px">Получить уведомление</button>
 <script>
     setInterval(() => {
@@ -27,12 +27,12 @@
     window.onload = () => navigator.serviceWorker.getRegistrations().then(function(registrations) {
         window.WebWorkers = registrations;
 
-        // const registration = navigator.serviceWorker.register(
-        //     "cache-service-worker.js",
-        //     { scope: "/" },
-        // );
+        const registration = navigator.serviceWorker.register(
+            "cache-service-worker.js",
+            { scope: "/" },
+        );
 
-        // console.log(registration);
+        console.log("cache-service-worker.js", registration);
 
         window.akPush = new AKPush();
 
@@ -49,11 +49,6 @@
     });
     document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
         try {
-            const akPush = new AKPush({
-                debug: 'true',
-                swPath: '/assets/service-worker.js',
-            });
-
             akPush.initSubscription({ email: 'bulba@azcabaeba.su' }) // ..показать форму подписки
         }
         catch (e) {
