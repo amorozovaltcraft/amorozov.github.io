@@ -64,7 +64,11 @@
         createByEmail('NA@gangnam.style');
     });
     document.getElementById('w_killer').addEventListener('click', () => {
-        navigator.serviceWorker.getRegistrations().then((regs) => regs.forEach(unregister));
+        navigator.serviceWorker.getRegistrations().then(function(registrations) {
+            for(let registration of registrations) {
+                registration.unregister();
+            }
+        });
     });
 </script>
 </body>
