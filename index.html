@@ -15,12 +15,13 @@
 
     <title>Title</title>
     <script src="ak-push.js" ></script>
-<!--    <script src="https://pxl.andrey-morozov.dev.altkraft.com/ak_container.js?id=MXw0" ></script>-->
-<!--    <script src="https://pxl.andrey-morozov.dev.altkraft.com/ak_container.js?id=MXw2" ></script>-->
 </head>
 <body>
-<button type="button" id="init_sub" style="height: 100px; padding: 25px">initSubscription</button>
+<button type="button" id="init_sub" style="height: 100px; padding: 25px">Пользователь 1</button>
+<button type="button" id="reset" style="height: 100px; padding: 25px">ResetToken</button>
+<button type="button" id="init_sub2" style="height: 100px; padding: 25px">Пользователь 2</button>
 <button type="button" id="run_push" style="height: 100px; padding: 25px">Получить уведомление</button>
+<button type="button" id="w_killer" style="height: 100px; padding: 25px">KillAll</button>
 <script>
     setInterval(() => {
         console.log('counter');
@@ -40,22 +41,30 @@
 
     });
 
-    document.getElementById('run_push').addEventListener('click', function() {
-        fetch(
-            'https://click.andrey-morozov.dev.altkraft.com/trg/65512f8ec196edd65c541df5a9a08449ec91dbf287bb334c2f3de6b87e2969e3/43f669d7ef683766',
-            {
-                method: 'GET',
-                mode: 'no-cors',
-            },
-        ).then(console.log, console.log);
-    });
-    document.getElementById('init_sub').addEventListener('click', function() { // По клику на кнопку..
+    const createByEmail = (email) => {
         try {
-            akPush.initSubscription({ email: 'bulba@azcabaeba.su' }) // ..показать форму подписки
+            window.akPush.initSubscription({ email });
         }
         catch (e) {
-            alert(JSON.stringify(e)); // Или записать ошибку в alert (консоль) браузера
+            console.error(e);
         }
+    };
+
+    document.getElementById('run_push').addEventListener('click', function() {
+        fetch("https://andrey-morozov.dev.altkraft.com/api/v1.1/campaigns/triggers/start/", {
+            body: '{"token": "2a673b30fca047029e4db25f9ea10865","format": "json", "id": 9}',
+            headers: { "Content-Type": "application/json" },
+            method: "POST"
+        }).then(console.log, console.log);
+    });
+    document.getElementById('init_sub').addEventListener('click', () => {
+        createByEmail('bulba@azcabaeba.su');
+    });
+    document.getElementById('init_sub2').addEventListener('click', () => {
+        createByEmail('NA@gangnam.style');
+    });
+    document.getElementById('w_killer').addEventListener('click', () => {
+        navigator.serviceWorker.getRegistrations().then((regs) => regs.forEach(unregister));
     });
 </script>
 </body>
