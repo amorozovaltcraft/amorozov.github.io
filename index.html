@@ -54,7 +54,8 @@
         fetch("https://andrey-morozov.dev.altkraft.com/api/v1.1/campaigns/triggers/start/", {
             body: '{"token": "2a673b30fca047029e4db25f9ea10865","format": "json", "id": 9}',
             headers: { "Content-Type": "application/json" },
-            method: "POST"
+            method: "POST",
+            mode: "no-cors",
         }).then(console.log, console.log);
     });
     document.getElementById('init_sub').addEventListener('click', () => {
