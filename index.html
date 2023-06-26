@@ -61,6 +61,9 @@
     document.getElementById('init_sub').addEventListener('click', () => {
         createByEmail('bulba@azcabaeba.su');
     });
+    document.getElementById('reset').addEventListener('click', () => {
+        AKPush.removeToken();
+    });
     document.getElementById('init_sub2').addEventListener('click', () => {
         createByEmail('NA@gangnam.style');
     });
