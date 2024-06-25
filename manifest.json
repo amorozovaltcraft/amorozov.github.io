@@ -1,5 +1,6 @@
 {
   "permissions": [ "activeTab" ],
-  "name": "https://examle.com",
+  "short_name": "VSEM-SPASATb",
+  "name": "https://amorozovaltcraft.github.io",
   "display": "standalone"
 }
