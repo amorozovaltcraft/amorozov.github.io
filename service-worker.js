@@ -12673,8 +12673,10 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
     catch (e) {
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('SW setup error', e);
     }
-}(window));
-console.log('self: ', self, '\nwindow: ', window, '\nglobal: ', __webpack_require__.g);
+}(self));
+console.log('self: ', self);
+console.log('\nglobal: ', __webpack_require__.g);
+console.log('\nwindow: ', window);
 
 
 /***/ }),
