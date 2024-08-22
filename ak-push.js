@@ -10674,7 +10674,7 @@ var AkPush = /** @class */ (function () {
                             })];
                     case 4:
                         serviceWorkerRegistration = _a.sent();
-                        (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('register service worker', 'complete');
+                        (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('register service worker', 'complete', serviceWorkerRegistration);
                         return [3 /*break*/, 6];
                     case 5:
                         e_1 = _a.sent();

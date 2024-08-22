@@ -12648,16 +12648,27 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if ((0,_helper__WEBPACK_IMPORTED_MODULE_5__.shouldUseFirebase)(config)) {
             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('sw: should use firebase');
             windowSelf.addEventListener('push', pushHandlerFirebase);
-            var app = _firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp({
-                apiKey: config.firebase.apiKey,
-                projectId: config.firebase.projectId,
-                messagingSenderId: config.firebase.messagingSenderId,
-                storageBucket: [config.firebase.projectId, config.firebase.bucketSubdomain].join('.'),
-                authDomain: [config.firebase.projectId, config.firebase.authSubdomain].join('.'),
-                databaseURL: [config.firebase.projectId, config.firebase.dbSubdomain].join('.'),
-                appId: config.firebase.appId,
-            }, config.randomPrefix);
+            var app = _firebase_app__WEBPACK_IMPORTED_MODULE_1__.getApps().find(function (_a) {
+                var name = _a.name;
+                return (name === config.randomPrefix);
+            });
+            // .getApp(config.randomPrefix);
+            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('has app?:', app);
+            if (!app) {
+                app = _firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp({
+                    apiKey: config.firebase.apiKey,
+                    projectId: config.firebase.projectId,
+                    messagingSenderId: config.firebase.messagingSenderId,
+                    storageBucket: [config.firebase.projectId, config.firebase.bucketSubdomain].join('.'),
+                    authDomain: [config.firebase.projectId, config.firebase.authSubdomain].join('.'),
+                    databaseURL: [config.firebase.projectId, config.firebase.dbSubdomain].join('.'),
+                    appId: config.firebase.appId,
+                }, config.randomPrefix);
+                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('has app:', app);
+            }
+            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('onBackgroundMessage setup start');
             (0,_firebase_messaging_sw__WEBPACK_IMPORTED_MODULE_2__.onBackgroundMessage)(_firebase_messaging__WEBPACK_IMPORTED_MODULE_3__.getMessaging(app), backgroundMessageHandlerFirebase);
+            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('onBackgroundMessage setup end');
             windowSelf.addEventListener('notificationclick', clickNotificationHandler);
         }
         else if (config.browser === 'Safari') {
@@ -12674,6 +12685,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
     catch (e) {
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('SW setup error', e);
     }
+    // eslint-disable-next-line no-restricted-globals
 }(self));
 
 
