@@ -12673,8 +12673,8 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
     catch (e) {
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('SW setup error', e);
     }
-    // eslint-disable-next-line no-restricted-globals
-}(self));
+}(window));
+console.log('self: ', self, '\nwindow: ', window, '\nglobal: ', __webpack_require__.g);
 
 
 /***/ }),
