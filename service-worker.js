@@ -11747,6 +11747,7 @@ function showNotification(title, options) {
  */
 function getSWPath(props) {
     var browser = props.browser, expirationSWChrome = props.expirationSWChrome, swPath = props.swPath;
+    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('getSWPath: ', props);
     if (browser === 'Chrome') {
         var expTime = (expirationSWChrome !== 0) ? expirationSWChrome : 900;
         return swPath + "?browser=" + browser + "&expiration=" + Math.floor(Date.now() / (expTime * 1000));
@@ -12637,8 +12638,8 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
     }
     try {
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('sw: start install handlers');
-        (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('sw: used self.skipWaiting();');
-        windowSelf.addEventListener('install', windowSelf.skipWaiting);
+        // debug('sw: used self.skipWaiting();');
+        // windowSelf.addEventListener('install', windowSelf.skipWaiting);
         config.browser = (0,_helper__WEBPACK_IMPORTED_MODULE_5__.getBrowserNameFromURL)(windowSelf.location.href);
         if (!config.browser) {
             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('clickNotificationHandler. Location: ', windowSelf.location.href, 'getBrowserNameFromURL:', (0,_helper__WEBPACK_IMPORTED_MODULE_5__.getBrowserNameFromURL)(windowSelf.location.href));
@@ -12674,9 +12675,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_6__.debug)('SW setup error', e);
     }
 }(self));
-console.log('self: ', self);
-console.log('\nglobal: ', __webpack_require__.g);
-console.log('\nwindow: ', window);
 
 
 /***/ }),

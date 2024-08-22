@@ -12025,6 +12025,7 @@ function showNotification(title, options) {
  */
 function getSWPath(props) {
     var browser = props.browser, expirationSWChrome = props.expirationSWChrome, swPath = props.swPath;
+    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('getSWPath: ', props);
     if (browser === 'Chrome') {
         var expTime = (expirationSWChrome !== 0) ? expirationSWChrome : 900;
         return swPath + "?browser=" + browser + "&expiration=" + Math.floor(Date.now() / (expTime * 1000));
