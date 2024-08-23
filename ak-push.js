@@ -10639,7 +10639,7 @@ var AkPush = /** @class */ (function () {
      */
     AkPush.prototype.initialiseFirebaseNotification = function (initData) {
         return __awaiter(this, void 0, void 0, function () {
-            var match, update, customData, event, needRunUseServiceWorker, notificationPermission, serviceWorkerRegistration, serviceWorkerRegistration_1, e_1, token, tokenCached, subscription, provider, subscribeEventPayload, messaging, err_3;
+            var match, update, customData, event, needRunUseServiceWorker, notificationPermission, serviceWorkerRegistration, registration, e_1, token, tokenCached, subscription, provider, subscribeEventPayload, messaging, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -10664,6 +10664,7 @@ var AkPush = /** @class */ (function () {
                         serviceWorkerRegistration = _a.sent();
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('getPushServiceWorker', 'complete');
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)(serviceWorkerRegistration);
+                        registration = void 0;
                         _a.label = 3;
                     case 3:
                         _a.trys.push([3, 5, , 6]);
@@ -10674,7 +10675,7 @@ var AkPush = /** @class */ (function () {
                                 swPath: _config__WEBPACK_IMPORTED_MODULE_2__.default.swPath,
                             })];
                     case 4:
-                        serviceWorkerRegistration_1 = _a.sent();
+                        registration = _a.sent();
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('register service worker', 'complete');
                         return [3 /*break*/, 6];
                     case 5:
@@ -10684,7 +10685,9 @@ var AkPush = /** @class */ (function () {
                     case 6:
                         _a.trys.push([6, 13, , 14]);
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.messaging().getToken', 'start');
-                        return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.getMessaging)(), { serviceWorkerRegistration: serviceWorkerRegistration })];
+                        return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.getMessaging)(), {
+                                serviceWorkerRegistration: needRunUseServiceWorker ? registration : undefined,
+                            })];
                     case 7:
                         token = _a.sent();
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.messaging().getToken', 'complete');
@@ -12491,7 +12494,7 @@ function updateFirebaseToken(config, events) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, _firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken];
+                    return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)())];
                 case 2:
                     token_1 = _a.sent();
                     return [3 /*break*/, 4];

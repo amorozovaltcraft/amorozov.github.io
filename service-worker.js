@@ -12208,7 +12208,7 @@ function updateFirebaseToken(config, events) {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, _firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken];
+                    return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)())];
                 case 2:
                     token_1 = _a.sent();
                     return [3 /*break*/, 4];
