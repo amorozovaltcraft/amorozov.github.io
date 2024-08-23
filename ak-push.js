@@ -10386,8 +10386,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// import firebase from '@firebase/app';
-// import '@firebase/messaging';
 
 
 
@@ -10648,9 +10646,6 @@ var AkPush = /** @class */ (function () {
                         needRunUseServiceWorker = false;
                         if (Notification.permission === _types__WEBPACK_IMPORTED_MODULE_4__.NotificationPermissionStatus.Default)
                             needRunUseServiceWorker = true;
-                        (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.messaging().requestPermission', 'start');
-                        // await firebase.messaging().requestPermission();
-                        (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.messaging().requestPermission', 'complete');
                         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('Notification.requestPermission', 'start');
                         return [4 /*yield*/, Notification.requestPermission()];
                     case 1:
@@ -10736,15 +10731,6 @@ var AkPush = /** @class */ (function () {
                             _helper__WEBPACK_IMPORTED_MODULE_3__.messagesUnsubscribe[token] = (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.onMessage)(messaging, function (payload) {
                                 var _a, _b;
                                 (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('Message received:', payload);
-                                // const { title } = payload.notification;
-                                // const notificationOptions = {
-                                //     body: payload.notification.body,
-                                //     icon: payload.notification.icon,
-                                //     image: payload.notification.image,
-                                //     data: payload.notification.click_action,
-                                //     actions: payload.notification.actions,
-                                // };
-                                // showNotification(title, notificationOptions);
                                 (0,_helper__WEBPACK_IMPORTED_MODULE_3__.showNotification)((_b = (_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : '', payload.notification);
                             });
                         }
@@ -11491,10 +11477,10 @@ var INJECTED_CONFIG = {
     debug: 'true' === 'true',
     // @ts-ignore
     isTest: 'false' === 'true',
-    resourceToken: '2fHLS9YR9daS-a90b371eecc2952f',
-    apiServerHost: 'pxl.vladislav-chapliy.dev.altkraft.com',
+    resourceToken: '29QXnNUVgMsf-8bd58a5e46439e8f',
+    apiServerHost: 'pxl.andrey-morozov.dev.altkraft.com',
     swPath: '/service-worker.js',
-    vapidKey: '',
+    vapidKey: 'BBvQnsorFea0H5viBU9yk2oplPt-mMNoufKajJ0M3VpsdlaNNNgBnXhaD3FiCSjqCYMvuVHGj1xWcmTZkkuEbSA',
     firebase: {
         apiKey: 'AIzaSyApCsLsVPeFj2QQsucf7X1OToGJEvnX_0c',
         projectId: 'jilldabill-2ea63',
@@ -11508,23 +11494,23 @@ var INJECTED_CONFIG = {
         },
         Firefox: {
             // @ts-ignore
-            isFirebase: 'false' === 'true',
+            isFirebase: 'true' === 'true',
         },
         Opera: {
             // @ts-ignore
-            isFirebase: 'false' === 'true',
+            isFirebase: 'true' === 'true',
         },
         'Yandex Browser': {
             // @ts-ignore
-            isFirebase: 'false' === 'true',
+            isFirebase: 'true' === 'true',
         },
         'Samsung Internet for Android': {
             // @ts-ignore
-            isFirebase: 'false' === 'true',
+            isFirebase: 'true' === 'true',
         },
         Safari: {
-            websitePushID: '',
-            websitePushAPI: 'https://pxl.vladislav-chapliy.dev.altkraft.com/ap',
+            websitePushID: 'web.io.github.amorozovaltcraft',
+            websitePushAPI: 'https://pxl.andrey-morozov.dev.altkraft.com/ap',
         },
     },
     expirationSWChrome: '900',
@@ -11653,7 +11639,6 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-// import firebase from '@firebase/app';
 
 
 
@@ -12004,25 +11989,39 @@ function removeTokenLS(prefix) {
 /**
  * Показать push-уведомление
  * @param title
- * @param options
+ * @param payload
  */
-function showNotification(title, options) {
+function showNotification(title, payload) {
+    var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function () {
-        var notificationPermission, registration;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var notificationPermission, registration, _actions, actions, notificationOptions;
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0: return [4 /*yield*/, Notification.requestPermission()];
                 case 1:
-                    notificationPermission = _a.sent();
+                    notificationPermission = _f.sent();
                     if (!(notificationPermission === _types__WEBPACK_IMPORTED_MODULE_5__.NotificationPermissionStatus.Granted)) return [3 /*break*/, 4];
                     return [4 /*yield*/, getPushServiceWorker().then(function (worker) { return (worker && worker.active ? worker : undefined); })];
                 case 2:
-                    registration = _a.sent();
+                    registration = _f.sent();
+                    _actions = (_a = payload.data) === null || _a === void 0 ? void 0 : _a._actions;
+                    actions = void 0;
+                    if (_actions) {
+                        try {
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions start');
+                            actions = JSON.parse(_actions);
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions complete');
+                        }
+                        catch (e) {
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions error: ', e);
+                        }
+                    }
+                    notificationOptions = __assign({ body: (_b = payload.notification) === null || _b === void 0 ? void 0 : _b.body, icon: (_c = payload.notification) === null || _c === void 0 ? void 0 : _c.icon, image: (_d = payload.notification) === null || _d === void 0 ? void 0 : _d.image, click_action: ((_e = payload.fcmOptions) === null || _e === void 0 ? void 0 : _e.link) || '' }, (actions && { actions: actions }));
                     if (!registration) return [3 /*break*/, 4];
-                    return [4 /*yield*/, registration.showNotification(title, options)];
+                    return [4 /*yield*/, registration.showNotification(title, notificationOptions)];
                 case 3:
-                    _a.sent();
-                    _a.label = 4;
+                    _f.sent();
+                    _f.label = 4;
                 case 4: return [2 /*return*/];
             }
         });
@@ -12140,7 +12139,6 @@ function initializeServices(config, events) {
                     return [3 /*break*/, 5];
                 case 5:
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('should use firebase');
-                    // firebase.app()
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.initializeApp', 'start');
                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)({
                         appId: config.firebase.appId,
@@ -12154,6 +12152,7 @@ function initializeServices(config, events) {
                     messaging = (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)();
                     if (!registration) return [3 /*break*/, 7];
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)(' firebase.messaging().useServiceWorker', 'start');
+                    // TODO
                     // firebase.messaging().useServiceWorker(registration);
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.messaging().useServiceWorker', 'complete');
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.initializeApp', 'complete');
@@ -12171,7 +12170,6 @@ function initializeServices(config, events) {
                     _b.trys.push([8, 10, , 11]);
                     return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)(messaging, { serviceWorkerRegistration: registration })];
                 case 9:
-                    // token = await firebase.messaging().getToken();
                     token = _b.sent();
                     return [3 /*break*/, 11];
                 case 10:
@@ -12185,16 +12183,7 @@ function initializeServices(config, events) {
                         messagesUnsubscribe[token] = (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.onMessage)(messaging, function (payload) {
                             var _a, _b;
                             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('Message received:', payload);
-                            // const { title } = payload.notification;
-                            // const notificationOptions = {
-                            //     body: payload.notification.body,
-                            //     icon: payload.notification.icon,
-                            //     image: payload.notification.image,
-                            //     data: payload.notification.click_action,
-                            //     actions: payload.notification.actions,
-                            // };
-                            // showNotification(title, notificationOptions);
-                            showNotification((_b = (_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : '', payload.notification);
+                            showNotification((_b = (_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : '', payload);
                         });
                     }
                     return [3 /*break*/, 14];
@@ -12497,7 +12486,6 @@ function updateFirebaseToken(config, events) {
                     _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)())];
                 case 2:
-                    // token = await firebase.messaging().getToken();
                     token = _a.sent();
                     return [3 /*break*/, 4];
                 case 3:
