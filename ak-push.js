@@ -10408,7 +10408,7 @@ function setCookieID(id) {
 }
 function urlB64ToUint8Array(base64String) {
     var padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-    var base64 = (base64String + padding).replace(/\-/g, '+').replace(/_/g, '/');
+    var base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
     var rawData = window.atob(base64);
     var outputArray = new Uint8Array(rawData.length);
     for (var i = 0; i < rawData.length; ++i) {
@@ -10731,7 +10731,7 @@ var AkPush = /** @class */ (function () {
                             _helper__WEBPACK_IMPORTED_MODULE_3__.messagesUnsubscribe[token] = (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_1__.onMessage)(messaging, function (payload) {
                                 var _a, _b;
                                 (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('Message received:', payload);
-                                (0,_helper__WEBPACK_IMPORTED_MODULE_3__.showNotification)((_b = (_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : '', payload.notification);
+                                (0,_helper__WEBPACK_IMPORTED_MODULE_3__.showNotification)((_b = (_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) !== null && _b !== void 0 ? _b : '', payload);
                             });
                         }
                         return [3 /*break*/, 11];
@@ -11207,41 +11207,35 @@ var AkPush = /** @class */ (function () {
     };
     AkPush.prototype.updateSubscription = function (match, update, customData, inexclusive) {
         return __awaiter(this, void 0, void 0, function () {
-            var status_1;
             var _this = this;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(document.readyState === 'complete' || document.readyState === 'interactive')) return [3 /*break*/, 2];
-                        return [4 /*yield*/, this.update({
-                                match: match || {},
-                                update: update || {},
-                                customData: customData || {},
-                                inexclusive: inexclusive,
-                            })];
-                    case 1:
-                        status_1 = _a.sent();
-                        return [2 /*return*/, status_1];
-                    case 2: return [2 /*return*/, new Promise(function (resolve) {
-                            window.addEventListener('load', function () { return __awaiter(_this, void 0, void 0, function () {
-                                var status;
-                                return __generator(this, function (_a) {
-                                    switch (_a.label) {
-                                        case 0: return [4 /*yield*/, this.update({
-                                                match: match || {},
-                                                update: update || {},
-                                                customData: customData || {},
-                                                inexclusive: inexclusive,
-                                            })];
-                                        case 1:
-                                            status = _a.sent();
-                                            resolve(status);
-                                            return [2 /*return*/];
-                                    }
-                                });
-                            }); });
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    return [2 /*return*/, this.update({
+                            match: match || {},
+                            update: update || {},
+                            customData: customData || {},
+                            inexclusive: inexclusive,
                         })];
                 }
+                return [2 /*return*/, new Promise(function (resolve) {
+                        window.addEventListener('load', function () { return __awaiter(_this, void 0, void 0, function () {
+                            var status;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0: return [4 /*yield*/, this.update({
+                                            match: match || {},
+                                            update: update || {},
+                                            customData: customData || {},
+                                            inexclusive: inexclusive,
+                                        })];
+                                    case 1:
+                                        status = _a.sent();
+                                        resolve(status);
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    })];
             });
         });
     };
