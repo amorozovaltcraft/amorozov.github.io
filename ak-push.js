@@ -10975,7 +10975,7 @@ var AkPush = /** @class */ (function () {
                                 try {
                                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.initializeApp', 'start');
                                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)({
-                                        appId: 'altcraft',
+                                        appId: this.config.firebase.appId,
                                         apiKey: this.config.firebase.apiKey,
                                         projectId: this.config.firebase.projectId,
                                         messagingSenderId: this.config.firebase.messagingSenderId,
@@ -11499,6 +11499,7 @@ var INJECTED_CONFIG = {
         apiKey: 'AIzaSyApCsLsVPeFj2QQsucf7X1OToGJEvnX_0c',
         projectId: 'jilldabill-2ea63',
         messagingSenderId: '120148707003',
+        appId: '1:120148707003:web:425d83570ef2d233d94b9e',
     },
     browsers: {
         Chrome: {
@@ -11548,7 +11549,7 @@ var SERVICE_CONFIG = {
     },
     allFirebase: undefined,
 };
-var CONFIG = __assign(__assign(__assign({}, SERVICE_CONFIG), INJECTED_CONFIG), { firebase: __assign(__assign({}, SERVICE_CONFIG.firebase), INJECTED_CONFIG.firebase), expirationSWChrome: parseInt(INJECTED_CONFIG.expirationSWChrome) || 0 });
+var CONFIG = __assign(__assign(__assign({}, SERVICE_CONFIG), INJECTED_CONFIG), { firebase: __assign(__assign(__assign({}, SERVICE_CONFIG.firebase), INJECTED_CONFIG.firebase), { appId: '1:120148707003:web:425d83570ef2d233d94b9e' }), expirationSWChrome: parseInt(INJECTED_CONFIG.expirationSWChrome, 10) || 0 });
 
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
@@ -12142,7 +12143,7 @@ function initializeServices(config, events) {
                     // firebase.app()
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.initializeApp', 'start');
                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)({
-                        appId: 'altcraft',
+                        appId: config.firebase.appId,
                         apiKey: config.firebase.apiKey,
                         projectId: config.firebase.projectId,
                         messagingSenderId: config.firebase.messagingSenderId,
@@ -12486,7 +12487,7 @@ function updateSubscriptionData(config, subscriptionData, events) {
  */
 function updateFirebaseToken(config, events) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, token_1, err_4, tokenCached, subscriptionData, e_9;
+        var token, err_4, tokenCached, subscriptionData, e_9;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -12496,7 +12497,8 @@ function updateFirebaseToken(config, events) {
                     _a.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)())];
                 case 2:
-                    token_1 = _a.sent();
+                    // token = await firebase.messaging().getToken();
+                    token = _a.sent();
                     return [3 /*break*/, 4];
                 case 3:
                     err_4 = _a.sent();
