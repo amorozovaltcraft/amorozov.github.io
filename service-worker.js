@@ -11719,7 +11719,7 @@ function removeTokenLS(prefix) {
 function showNotification(title, payload) {
     var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function () {
-        var notificationPermission, registration, _actions, actions, notificationOptions;
+        var notificationPermission, registration, ak_actions, actions, notificationOptions;
         return __generator(this, function (_f) {
             switch (_f.label) {
                 case 0: return [4 /*yield*/, Notification.requestPermission()];
@@ -11729,16 +11729,16 @@ function showNotification(title, payload) {
                     return [4 /*yield*/, getPushServiceWorker().then(function (worker) { return (worker && worker.active ? worker : undefined); })];
                 case 2:
                     registration = _f.sent();
-                    _actions = (_a = payload.data) === null || _a === void 0 ? void 0 : _a._actions;
+                    ak_actions = (_a = payload.data) === null || _a === void 0 ? void 0 : _a.ak_actions;
                     actions = void 0;
-                    if (_actions) {
+                    if (ak_actions) {
                         try {
-                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions start');
-                            actions = JSON.parse(_actions);
-                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions complete');
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions start');
+                            actions = JSON.parse(ak_actions);
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions complete');
                         }
                         catch (e) {
-                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse _actions error: ', e);
+                            (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions error: ', e);
                         }
                     }
                     notificationOptions = __assign({ body: (_b = payload.notification) === null || _b === void 0 ? void 0 : _b.body, icon: (_c = payload.notification) === null || _c === void 0 ? void 0 : _c.icon, image: (_d = payload.notification) === null || _d === void 0 ? void 0 : _d.image, click_action: ((_e = payload.fcmOptions) === null || _e === void 0 ? void 0 : _e.link) || '' }, (actions && { actions: actions }));
@@ -12201,56 +12201,69 @@ function updateSubscriptionData(config, subscriptionData, events) {
  */
 function updateFirebaseToken(config, events) {
     return __awaiter(this, void 0, void 0, function () {
-        var token, err_4, tokenCached, subscriptionData, e_9;
+        var serviceWorkerRegistration, token, e_9, err_4, tokenCached, subscriptionData, e_10;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.messaging().getToken', 'start');
+                    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('> getPushServiceWorker', 'start');
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)())];
+                    return [4 /*yield*/, getPushServiceWorker()];
                 case 2:
-                    token = _a.sent();
+                    serviceWorkerRegistration = _a.sent();
+                    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('< getPushServiceWorker', 'complete');
+                    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('>> serviceWorkerRegistration', serviceWorkerRegistration);
                     return [3 /*break*/, 4];
                 case 3:
-                    err_4 = _a.sent();
-                    console.error('Error occurred: ', err_4);
+                    e_9 = _a.sent();
+                    (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('err get registration', e_9);
                     return [3 /*break*/, 4];
                 case 4:
+                    _a.trys.push([4, 6, , 7]);
+                    return [4 /*yield*/, (0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getToken)((0,_firebase_messaging__WEBPACK_IMPORTED_MODULE_4__.getMessaging)(), { serviceWorkerRegistration: serviceWorkerRegistration })];
+                case 5:
+                    token = _a.sent();
+                    return [3 /*break*/, 7];
+                case 6:
+                    err_4 = _a.sent();
+                    console.error('Error occurred: ', err_4);
+                    return [3 /*break*/, 7];
+                case 7:
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.messaging().getToken', 'complete', token);
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('get cached token', 'start');
                     return [4 /*yield*/, pullCache(config.randomPrefix)];
-                case 5:
+                case 8:
                     tokenCached = _a.sent();
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('get cached token', 'complete', tokenCached);
-                    if (!(token && tokenCached !== token)) return [3 /*break*/, 11];
+                    if (!(token && tokenCached !== token)) return [3 /*break*/, 14];
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('New token detected: ', token);
-                    _a.label = 6;
-                case 6:
-                    _a.trys.push([6, 10, , 11]);
-                    if (!tokenCached) return [3 /*break*/, 8];
+                    _a.label = 9;
+                case 9:
+                    _a.trys.push([9, 13, , 14]);
+                    if (!tokenCached) return [3 /*break*/, 11];
                     subscriptionData = {
                         provider: getNormalizedProvider(config.browser || '') + "Firebase",
                         tokenCached: tokenCached,
                         token: token,
                     };
                     return [4 /*yield*/, updateSubscriptionData(config, subscriptionData, events)];
-                case 7:
+                case 10:
                     _a.sent();
-                    _a.label = 8;
-                case 8:
+                    _a.label = 11;
+                case 11:
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('saving firebase token to cache', token, 'start');
                     return [4 /*yield*/, pushCache(config.randomPrefix, token || '')];
-                case 9:
+                case 12:
                     _a.sent();
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('saving firebase token to cache', token, 'complete');
-                    return [3 /*break*/, 11];
-                case 10:
-                    e_9 = _a.sent();
-                    console.error('Failed to save firebase token to the cache', e_9);
-                    return [3 /*break*/, 11];
-                case 11: return [2 /*return*/];
+                    return [3 /*break*/, 14];
+                case 13:
+                    e_10 = _a.sent();
+                    console.error('Failed to save firebase token to the cache', e_10);
+                    return [3 /*break*/, 14];
+                case 14: return [2 /*return*/];
             }
         });
     });
@@ -12260,7 +12273,7 @@ function updateFirebaseToken(config, events) {
  */
 function updateSafariPWAToken(config, events) {
     return __awaiter(this, void 0, void 0, function () {
-        var serviceWorkerRegistration, subscription, token, keysCached, _a, _b, tokenCached, keys, subscriptionData, e_10;
+        var serviceWorkerRegistration, subscription, token, keysCached, _a, _b, tokenCached, keys, subscriptionData, e_11;
         return __generator(this, function (_c) {
             switch (_c.label) {
                 case 0: return [4 /*yield*/, getPushServiceWorker()];
@@ -12314,8 +12327,8 @@ function updateSafariPWAToken(config, events) {
                     _c.label = 10;
                 case 10: return [3 /*break*/, 12];
                 case 11:
-                    e_10 = _c.sent();
-                    console.error('Failed to save token and keys to the cache', e_10);
+                    e_11 = _c.sent();
+                    console.error('Failed to save token and keys to the cache', e_11);
                     return [3 /*break*/, 12];
                 case 12: return [2 /*return*/];
             }
@@ -12327,7 +12340,7 @@ function updateSafariPWAToken(config, events) {
  */
 function updateDefaultSubscription(config, events) {
     return __awaiter(this, void 0, void 0, function () {
-        var serviceWorkerRegistration, subscription, endpointCached, subscriptionData, e_11;
+        var serviceWorkerRegistration, subscription, endpointCached, subscriptionData, e_12;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -12372,8 +12385,8 @@ function updateDefaultSubscription(config, events) {
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('saving subscription endpoint from push manager to cache', subscription.endpoint, 'complete');
                     return [3 /*break*/, 9];
                 case 8:
-                    e_11 = _a.sent();
-                    console.error('Failed to save subscription endpoint from push manager to the cache', e_11);
+                    e_12 = _a.sent();
+                    console.error('Failed to save subscription endpoint from push manager to the cache', e_12);
                     return [3 /*break*/, 9];
                 case 9: return [2 /*return*/];
             }
@@ -12498,16 +12511,16 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
         (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)(payload);
         var title = ((_a = payload.notification) === null || _a === void 0 ? void 0 : _a.title) || '';
         // eslint-disable-next-line no-underscore-dangle
-        var _actions = (_b = payload.data) === null || _b === void 0 ? void 0 : _b._actions;
+        var ak_actions = (_b = payload.data) === null || _b === void 0 ? void 0 : _b.ak_actions;
         var actions;
-        if (_actions) {
+        if (ak_actions) {
             try {
-                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse _actions start');
-                actions = JSON.parse(_actions);
-                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse _actions complete');
+                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse ak_actions start');
+                actions = JSON.parse(ak_actions);
+                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse ak_actions complete');
             }
             catch (e) {
-                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse _actions error: ', e);
+                (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('push firebase parse ak_actions error: ', e);
             }
         }
         var notificationOptions = __assign({ body: (_c = payload.notification) === null || _c === void 0 ? void 0 : _c.body, icon: (_d = payload.notification) === null || _d === void 0 ? void 0 : _d.icon, image: (_e = payload.notification) === null || _e === void 0 ? void 0 : _e.image, click_action: ((_f = payload.fcmOptions) === null || _f === void 0 ? void 0 : _f.link) || '' }, (actions && { actions: actions }));
