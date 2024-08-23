@@ -11462,19 +11462,16 @@ var __assign = (undefined && undefined.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-/**
- *
- */
 var SERVER_PREFIX = 'https://';
 var INJECTED_CONFIG = {
     // @ts-ignore
     debug: 'true' === 'true',
     // @ts-ignore
     isTest: 'false' === 'true',
-    resourceToken: '29QXnNUVgMsf-8bd58a5e46439e8f',
-    apiServerHost: 'pxl.andrey-morozov.dev.altkraft.com',
+    resourceToken: '2fHLS9YR9daS-a90b371eecc2952f',
+    apiServerHost: 'pxl.vladislav-chapliy.dev.altkraft.com',
     swPath: '/service-worker.js',
-    vapidKey: 'BBvQnsorFea0H5viBU9yk2oplPt-mMNoufKajJ0M3VpsdlaNNNgBnXhaD3FiCSjqCYMvuVHGj1xWcmTZkkuEbSA',
+    vapidKey: '',
     firebase: {
         apiKey: 'AIzaSyApCsLsVPeFj2QQsucf7X1OToGJEvnX_0c',
         projectId: 'jilldabill-2ea63',
@@ -11488,23 +11485,23 @@ var INJECTED_CONFIG = {
         },
         Firefox: {
             // @ts-ignore
-            isFirebase: 'true' === 'true',
+            isFirebase: 'false' === 'true',
         },
         Opera: {
             // @ts-ignore
-            isFirebase: 'true' === 'true',
+            isFirebase: 'false' === 'true',
         },
         'Yandex Browser': {
             // @ts-ignore
-            isFirebase: 'true' === 'true',
+            isFirebase: 'false' === 'true',
         },
         'Samsung Internet for Android': {
             // @ts-ignore
-            isFirebase: 'true' === 'true',
+            isFirebase: 'false' === 'true',
         },
         Safari: {
-            websitePushID: 'web.io.github.amorozovaltcraft',
-            websitePushAPI: 'https://pxl.andrey-morozov.dev.altkraft.com/ap',
+            websitePushID: '',
+            websitePushAPI: 'https://pxl.vladislav-chapliy.dev.altkraft.com/ap',
         },
     },
     expirationSWChrome: '900',
@@ -11529,7 +11526,7 @@ var SERVICE_CONFIG = {
     },
     allFirebase: undefined,
 };
-var CONFIG = __assign(__assign(__assign({}, SERVICE_CONFIG), INJECTED_CONFIG), { firebase: __assign(__assign(__assign({}, SERVICE_CONFIG.firebase), INJECTED_CONFIG.firebase), { appId: '1:120148707003:web:425d83570ef2d233d94b9e' }), expirationSWChrome: parseInt(INJECTED_CONFIG.expirationSWChrome, 10) || 0 });
+var CONFIG = __assign(__assign(__assign({}, SERVICE_CONFIG), INJECTED_CONFIG), { firebase: __assign(__assign({}, SERVICE_CONFIG.firebase), INJECTED_CONFIG.firebase), expirationSWChrome: parseInt(INJECTED_CONFIG.expirationSWChrome, 10) || 0 });
 
 /* harmony default export */ __webpack_exports__["default"] = (CONFIG);
 
