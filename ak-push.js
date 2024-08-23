@@ -11985,7 +11985,7 @@ function removeTokenLS(prefix) {
 function showNotification(title, payload) {
     var _a, _b, _c, _d, _e;
     return __awaiter(this, void 0, void 0, function () {
-        var notificationPermission, registration, ak_actions, actions, notificationOptions;
+        var notificationPermission, registration, akActions, actions, notificationOptions;
         return __generator(this, function (_f) {
             switch (_f.label) {
                 case 0: return [4 /*yield*/, Notification.requestPermission()];
@@ -11995,19 +11995,19 @@ function showNotification(title, payload) {
                     return [4 /*yield*/, getPushServiceWorker().then(function (worker) { return (worker && worker.active ? worker : undefined); })];
                 case 2:
                     registration = _f.sent();
-                    ak_actions = (_a = payload.data) === null || _a === void 0 ? void 0 : _a.ak_actions;
+                    akActions = (_a = payload.data) === null || _a === void 0 ? void 0 : _a.ak_actions;
                     actions = void 0;
-                    if (ak_actions) {
+                    if (akActions) {
                         try {
                             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions start');
-                            actions = JSON.parse(ak_actions);
+                            actions = JSON.parse(akActions);
                             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions complete');
                         }
                         catch (e) {
                             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('push firebase parse ak_actions error: ', e);
                         }
                     }
-                    notificationOptions = __assign({ body: (_b = payload.notification) === null || _b === void 0 ? void 0 : _b.body, icon: (_c = payload.notification) === null || _c === void 0 ? void 0 : _c.icon, image: (_d = payload.notification) === null || _d === void 0 ? void 0 : _d.image, click_action: ((_e = payload.fcmOptions) === null || _e === void 0 ? void 0 : _e.link) || '' }, (actions && { actions: actions }));
+                    notificationOptions = __assign({ body: (_b = payload.notification) === null || _b === void 0 ? void 0 : _b.body, icon: (_c = payload.notification) === null || _c === void 0 ? void 0 : _c.icon, image: (_d = payload.notification) === null || _d === void 0 ? void 0 : _d.image, data: { click_action: (_e = payload.fcmOptions) === null || _e === void 0 ? void 0 : _e.link } }, (actions && { actions: actions }));
                     if (!registration) return [3 /*break*/, 4];
                     return [4 /*yield*/, registration.showNotification(title, notificationOptions)];
                 case 3:
