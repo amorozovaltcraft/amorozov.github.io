@@ -10972,6 +10972,7 @@ var AkPush = /** @class */ (function () {
                                 try {
                                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('firebase.initializeApp', 'start');
                                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)({
+                                        appId: 'altcraft',
                                         apiKey: this.config.firebase.apiKey,
                                         projectId: this.config.firebase.projectId,
                                         messagingSenderId: this.config.firebase.messagingSenderId,
@@ -12138,6 +12139,7 @@ function initializeServices(config, events) {
                     // firebase.app()
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.initializeApp', 'start');
                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)({
+                        appId: 'altcraft',
                         apiKey: config.firebase.apiKey,
                         projectId: config.firebase.projectId,
                         messagingSenderId: config.firebase.messagingSenderId,

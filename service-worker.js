@@ -11856,6 +11856,7 @@ function initializeServices(config, events) {
                     // firebase.app()
                     (0,_ioc_container__WEBPACK_IMPORTED_MODULE_7__.debug)('firebase.initializeApp', 'start');
                     (0,_firebase_app__WEBPACK_IMPORTED_MODULE_3__.initializeApp)({
+                        appId: 'altcraft',
                         apiKey: config.firebase.apiKey,
                         projectId: config.firebase.projectId,
                         messagingSenderId: config.firebase.messagingSenderId,
@@ -12675,6 +12676,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
             (0,_ioc_container__WEBPACK_IMPORTED_MODULE_5__.debug)('sw: should use firebase');
             self.addEventListener('push', pushHandlerFirebase);
             (0,_firebase_app__WEBPACK_IMPORTED_MODULE_1__.initializeApp)({
+                appId: 'altcraft',
                 apiKey: config.firebase.apiKey,
                 projectId: config.firebase.projectId,
                 messagingSenderId: config.firebase.messagingSenderId,
