@@ -2,5 +2,15 @@
   "permissions": [ "activeTab" ],
   "short_name": "VSEM-SPASATb",
   "name": "https://amorozovaltcraft.github.io",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "short_name": "PWA",
+  "theme_color": "#2196F3",
+  "background_color": "#2196F3",
   "display": "standalone"
 }
