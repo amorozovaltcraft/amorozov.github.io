@@ -39,7 +39,7 @@
         //
         // console.log("cache-service-worker.js", registration);
 
-        window.akPush = new AKPush({});
+        // window.akPush = new AKPush({});
 
     });
 
@@ -61,6 +61,7 @@
         }).then(console.log, console.log);
     });
     document.getElementById('init_sub').addEventListener('click', () => {
+        window.akPush = new AKPush({});
         createByEmail('bulba@azcabaeba.su');
     });
     document.getElementById('reset').addEventListener('click', () => {
